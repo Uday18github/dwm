@@ -1,0 +1,40 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.cluster import DBSCAN
+
+data=pd.read_csv('/content/Mall_Customers (1) (1).csv')
+data.head()
+
+print("Dataset shape:",data.shape)
+
+data.isnull().any().any()
+
+X=data.loc[:,['Annual Income (k$)',
+              'Spending Score (1-100)']].values
+
+print(X.shape)
+
+from sklearn.neighbors import NearestNeighbors
+neighb=NearestNeighbors(n_neighbors=2)
+nbrs=neighb.fit(X)
+
+distances,indices=nbrs.kneighbors(X)
+distances
+
+distances=np.sort(distances,axis=0)
+distances=distances[:,1]
+plt.rcParams['figure.figsize']=(5,3)
+plt.plot(distances)
+plt.show()
+
+from sklearn.cluster import DBSCAN
+dbscan=DBSCAN(eps=8,min_samples=4).fit(X)
+labels=dbscan.labels_
+
+plt.scatter(X[:,0],X[:,1],c=labels,cmap="plasma")
+plt.xlabel("Income")
+plt.ylabel("Spending Score")
+plt.show()
+
