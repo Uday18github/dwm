@@ -1,0 +1,37 @@
+import pandas as pd
+data=pd.read_csv("/content/sample_data/Titanic.csv")
+data.head()
+
+data.drop(['PassengerId','Name','SibSp','Parch','Ticket','Cabin','Embarked'],axis='columns',inplace=True)
+data.head(10)
+
+target=data.Survived
+inputs=data.drop('Survived',axis='columns')
+inputs.head()
+
+dummies=pd.get_dummies(inputs.Sex)
+dummies.head()
+
+inputs=pd.concat([inputs,dummies],axis='columns')
+inputs.head()
+
+inputs.drop('Sex',axis='columns',inplace=True)
+inputs.head()
+
+inputs.columns[inputs.isna().any()]
+inputs.Age[:10]
+
+inputs.Age=inputs.Age.fillna(inputs.Age.mean())
+inputs.head(10)
+
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(inputs,target,test_size=0.2)
+from sklearn.naive_bayes import GaussianNB
+model=GaussianNB()
+model.fit(X_train,y_train)
+
+model.score(X_test,y_test)
+
+y_test[:10]
+
+model.predict(X_test[:10])
