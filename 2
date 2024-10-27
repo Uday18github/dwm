@@ -1,0 +1,41 @@
+import pandas as pd
+data={"Cars":["benz","rollsroyce","lamborgini","buggati"]}
+data
+
+df=pd.DataFrame(data)
+df
+
+df_encoded=pd.get_dummies(df["Cars"])
+df_encoded.head()
+
+from sklearn.preprocessing import OneHotEncoder
+encoder=OneHotEncoder()
+encoded_results=encoder.fit_transform(df).toarray()
+encoded_results
+
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+scale=StandardScaler()
+df=pd.read_csv("/content/sample_data/student.csv")
+df
+
+x=df[['marks','percentage']]
+scaledx=scale.fit_transform(x)
+print(scaledx)
+
+import numpy as np
+from sklearn.model_selection import train_test_split
+x=np.arange(1,25).reshape(12,2)
+y=np.array([0,1,1,0,1,0,0,1,1,0,1,0])
+x
+
+y
+
+x_train,x_test,y_train,y_test=train_test_split(x,y)
+x_train
+
+y_train
+
+x_test
+
+y_test
