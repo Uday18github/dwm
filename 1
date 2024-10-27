@@ -1,0 +1,41 @@
+import pandas as pd
+df=pd.read_csv("/content/sample_data/student.csv")
+df
+
+x=df.iloc[:,:-1]    
+x
+
+y=df.iloc[:,-1:]   
+y
+
+import pandas as pd
+df=pd.DataFrame({'A':[1,2,None,4,5],'B':[5,None,7,None,9]})
+df
+
+df.dropna(axis=0,inplace=True)
+df
+
+import pandas as pd
+df=pd.DataFrame({'A':[1,2,None,4,5],'B':[5,None,7,None,9]})
+df.fillna(df.mean(),inplace=True)
+df
+
+from sklearn.impute import KNNImputer
+import pandas as pd
+df=pd.DataFrame({'A':[1,2,None,4],'B':[5,None,7,None],'C':[None,10,None,11]})
+imputer=KNNImputer(n_neighbors=1)
+df_imputed=pd.DataFrame(imputer.fit_transform(df))
+df
+
+df_imputed
+
+import numpy as np
+import pandas as pd
+from sklearn.impute import KNNImputer
+dict={'Maths':[80,90,np.nan,95],'Chemistry':[60,65,56,np.nan],'Physics':[np.nan,57,80,78]}
+Before_imputation=pd.DataFrame(dict)
+print("Data Before Performing imputation\n",Before_imputation)
+imputer=KNNImputer(n_neighbors=2)
+After_imputation=imputer.fit_transform(Before_imputation)
+print("\n\nAfter Performing imputation\n",After_imputation)
+
