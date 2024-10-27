@@ -1,0 +1,39 @@
+#pearsons correlation
+from numpy.random import randn
+from numpy.random import seed
+from scipy.stats import pearsonr
+seed(1)
+x=[5,4,3,2,1]
+y=[2,2,2,1,1]
+corr,_=pearsonr(x,y)
+print('Pearsons Correlation:%.3f' %corr)
+
+#cosine similarity
+from math import *
+def square_rooted(x):
+  return round(sqrt(sum([a*a for a in x])),3)
+def cosine_similarity(x,y):
+  numerator=sum(a*b for a,b in zip(x,y))
+  denominator=square_rooted(x)*square_rooted(y)
+  return round(numerator/float(denominator),3)
+print(cosine_similarity([20,1,5,4,22],[2,54,13,15]))
+
+#Jaccard similarity
+from math import *
+def jaccard_similarity(x,y):
+  intersection_cardinality=len(set.intersection(*[set(x),set(y)]))
+  union_cardinality=len(set.union(*[set(x),set(y)]))
+  return intersection_cardinality/float(union_cardinality)
+print(jaccard_similarity([5,4,1,2,3],[0,2,3,5,7,9]))
+
+#euclidean distance
+from math import *
+def euclidean_distance(x,y):
+  return sqrt(sum(pow(a -b,2) for a,b in zip(x,y)))
+print(euclidean_distance([0,3,4,5],[-5,4,-2,1]))
+
+#Manhattan distance
+from math import *
+def manhattan_distance(x,y):
+  return sum(abs(a - b) for a,b in zip(x,y))
+print(manhattan_distance([5,2,1],[4,5,2]))
